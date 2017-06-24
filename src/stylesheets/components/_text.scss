@@ -16,3 +16,15 @@ p {
 .error-text {
 	color: lighten($error-color, 30%);
 }
+
+.stream-up {
+	color: $white-color;
+}
+
+.stream-down {
+	color: darken($white-color, 34%);
+}
+
+.hidden {
+	display: none;
+}

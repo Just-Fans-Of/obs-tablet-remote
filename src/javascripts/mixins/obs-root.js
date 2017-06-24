@@ -13,12 +13,27 @@ export default {
 			this.obs.connected = false
 		})
 
-		this.$obs.on('ready', getObsScenes.bind(this))
+		this.$obs.on('ready', () => {
+			getObsScenes.call(this);
+
+			this.$obs.getStreamingStatus().then(response => {
+				console.log("GOT STREAMING STATUS?", response);
+				this.obs.streaming = response['streaming']
+			})
+		});
 
 		this.$obs.on('scenes.change', getObsScenes.bind(this))
 
 		this.$obs.on('scenes.switch', state => {
 			this.obs.currentScene = state['scene-name']
+		})
+
+		this.$obs.on('stream.stop', () => {
+			this.obs.streaming = false;
+		})
+
+		this.$obs.on('stream.start', () => {
+			this.obs.streaming = true;
 		})
 
 		// On source state change
@@ -50,6 +65,7 @@ export default {
 				authRequired: null,
 				connected: false,
 				connecting: false,
+				streaming: false,
 
 				currentScene: null,
 				scenes: [],

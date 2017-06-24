@@ -174,6 +174,24 @@ export default class OBSRemote extends EventEmitter {
 	}
 
 	/**
+	 * OBS Remote GetStreamingStatus method
+	 *
+	 * @returns {Promise}
+	 */
+	getStreamingStatus() {
+		return this.send({'request-type': 'GetStreamingStatus'})
+	}
+
+	/**
+	 * OBS Remote StartStopStreaming method
+	 *
+	 * @returns {Promise}
+	 */
+	 startStopStreaming() {
+		return this.send({'request-type': 'StartStopStreaming'})
+	}
+
+	/**
 	 * Get ID for next request
 	 *
 	 * @returns {string}
